@@ -19,3 +19,19 @@ console.log("\n------------ EMPLOYEE TRACKER ------------\n");
     // Add a role => prompted to enter the name, salary, and department for the role and that role is added to the database
     // Add an employee => prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
     // Update an employee role => prompted to select an employee to update and their new role and this information is updated in the database 
+
+    const inquirer = require('inquirer');
+    const prompts = require ('./prompts and handling/prompts');
+    const mysql = require("mysql2");
+
+    const db = mysql.createConnection(
+      {
+        host: "localhost",
+        // MySQL username,
+        user: "root",
+        // MySQL password
+        password: "password", //enter password
+        database: "employees_db",
+      },
+      console.log(`Connected to the classlist_db database.`)
+    );
