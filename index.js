@@ -23,15 +23,7 @@ console.log("\n------------ EMPLOYEE TRACKER ------------\n");
     const inquirer = require('inquirer');
     const prompts = require ('./prompts and handling/prompts');
     const mysql = require("mysql2");
+    const connection = require('./config/connection')
+   
 
-    const db = mysql.createConnection(
-      {
-        host: "localhost",
-        // MySQL username,
-        user: "root",
-        // MySQL password
-        password: "password", //enter password
-        database: "employees_db",
-      },
-      console.log(`Connected to the classlist_db database.`)
-    );
+    
