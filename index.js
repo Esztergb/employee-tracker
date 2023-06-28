@@ -99,9 +99,10 @@ function mainMenu() {
             return;
         }
         console.table(res);
-        startingQuestion();
+        mainMenu();
     });
 };
+
 
  function viewDepartments() {
    const sql = `SELECT department.id, department.name AS Department FROM department;`
@@ -123,7 +124,7 @@ function viewRoles() {
             return;
         }
         console.table(res);
-        startingQuestion();
+        mainMenu();
     });
 };
 
