@@ -1,26 +1,24 @@
 //dependencies
-const inquirer = require('inquirer');
-const mysql = require('mysql2/promise');
+const inquirer = require("inquirer");
+const mysql = require("mysql2");
 const cTable = require("console.table");
 
 //connect to database
-require("dotenv").config();
+// require("dotenv").config();
 
 // Connect to database
 const db = mysql.createConnection(
   {
     host: "localhost",
-    // MySQL username,
-    user: process.env.DB_USER,
-    //MySQL password here
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-  }
-  //   console.log(`Connected to the employees_db database.`)
+    user: "root",
+    password: "password",
+    database: "employees_db",
+  },
+  console.log(`Connected to the employees_db database.`)
 );
 
 
-//wWelcome message and start main Menu
+//Welcome message and start main Menu
 db.connect(function (err) {
   if (err) throw err;
   console.log("***********************************");
@@ -32,18 +30,11 @@ db.connect(function (err) {
   mainMenu();
 });
 
-
-
-
-
-
-
-const connection = require('./config/connection');
-require('dotenv').config();
-
- const init = function () {
+//Display main menu 
+function mainMenu() {
    inquirer
-     .prompt({
+     .prompt([
+     {
        type: "list",
        name: "menu",
        message: "What would you like to do?",
@@ -57,32 +48,21 @@ require('dotenv').config();
          "Remove Employee",
          "Update Employee Role",
          "Exit",
-       ],
-     })
-     .then(function (answer) {
+       ]
+     }
+     ])
+     .then((answer) => {
        switch (answer.menu) {
          case "View All Employees":
            viewEmployees()
-           .then ((queryResults)=>{ 
-            console.table(queryResults)
-            init()
-            })
            break;
 
          case "View All Departments":
            viewDepartments()
-           .then((queryResults) => {
-             console.table(queryResults);
-             init();
-           });
            break;
 
          case "View All Roles":
            viewRoles()
-           .then((queryResults) => {
-             console.table(queryResults);
-             init();
-           });
            break;
 
          case "Add Employee":
@@ -102,15 +82,50 @@ require('dotenv').config();
            break;
 
          case "Exit":
-           connection.end();
-           break;
-         default:
+           console.log("See yoou next time!");
+           db.end();
            break;
        }
      });
- }
+ };
 
- init();
+ // View functions
+
+ function viewEmployees() {
+    const sql = `SELECT employee.id, employee.first_name, employee.last_name, role.title AS role, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN employee manager on manager.id = employee.manager_id INNER JOIN role ON (role.id = employee.role_id) INNER JOIN department ON (department.id = role.department_id) ORDER BY employee.id;`
+    db.query(sql, (err, res) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.table(res);
+        startingQuestion();
+    });
+};
+
+ function viewDepartments() {
+   const sql = `SELECT department.id, department.name AS Department FROM department;`
+    db.query(sql, (err, res) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.table(res);
+        mainMenu();
+    });
+}; 
+
+function viewRoles() {
+    const sql = `SELECT role.id, role.title AS role, role.salary, department.name AS department FROM role INNER JOIN department ON (department.id = role.department_id);`;
+    db.query(sql, (err, res) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.table(res);
+        startingQuestion();
+    });
+};
 
 
 
