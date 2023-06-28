@@ -1,11 +1,11 @@
-INSERT INTO department (name) --ID is included automatically and increments by one--
+INSERT INTO department (name)
 VALUES
 ('Engineering'),
 ('Finance'),
 ('Legal'),
 ('Sales');
 
-INSERT INTO role (title, salary, department_id) --ID is included automatically and increments by one--
+INSERT INTO role (title, salary, dept_id)
 VALUES
 ('Sales Lead', 100000, 4),
 ('Salesrep', 80000, 4),
@@ -16,9 +16,9 @@ VALUES
 ('Legal Team Lead', 250000, 3),
 ('Lawyer', 190000, 3);
 
-INSERT INTO emplyee (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
-('John', 'Doe', 1, null)
+('Dave', 'Smith', 1, null),
 ('Mike', 'Chan', 2, 1),
 ('Ashley', 'Rodriguez', 3, null),
 ('Kevin', 'Tupik', 4, 3),

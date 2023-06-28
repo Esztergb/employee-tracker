@@ -1,8 +1,6 @@
 const inquirer = require('inquirer'); // import inquirer
 const mysql = require ('mysql2');
-
-
-
+const viewEmployees =require ('./functions')
 
 function init() {
     inquirer

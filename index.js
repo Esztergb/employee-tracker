@@ -6,12 +6,10 @@ console.log("*                                 *");
 console.log("***********************************");
 console.log("")
 
+const inquirer = require('inquirer');
+const mysql = require('mysql2');
+const prompts = require ('./utils/prompts');
+const connection = require('./config/connection');
+// const consoleTable = require("console.table");
 
-    const inquirer = require('inquirer');
-    const mysql = require('mysql2');
-    const prompts = require ('./lib/prompts');
-    const functions = require ('./lib/functions');
-    const connection = require('./config/connection');
-   
-
-    
+ 
