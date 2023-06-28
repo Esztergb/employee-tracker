@@ -30,7 +30,7 @@ Developers frequently have to create interfaces that allow non-developers to eas
 The application will be invoked by using the “node index” command.  
 Click on the screenshot below to start the **Screencastify video tutorial**:
 
-*[![screencastify video](./assets/12-sql-homework-demo-01.png)](https://drive.google.com/file/d/1qJ2WuoA3rLOA-7dxKle6kzbnKXrvNMj9/view)*
+*[![screencastify video](./assets/Screenshot%202023-06-28%20at%209.37.17%20AM.png)](https://drive.google.com/file/d/1PMtAsJqsHxmenO24d3bcL-vt0616dfV7/view)*
   
 ## License
 This project is covered under the MIT licence.  

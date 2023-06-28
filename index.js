@@ -4,14 +4,14 @@ const mysql = require("mysql2");
 const cTable = require("console.table");
 
 //connect to database
-// require("dotenv").config();
+require("dotenv").config();
 
 // Connect to database
 const db = mysql.createConnection(
   {
     host: "localhost",
     user: "root",
-    password: "password",
+    password: process.env.DB_PASSWORD,
     database: "employees_db",
   },
   console.log(`Connected to the employees_db database.`)
@@ -89,7 +89,7 @@ function mainMenu() {
      });
  };
 
- // View functions
+ // View Table functions
 
  function viewEmployees() {
     const sql = `SELECT employee.id, employee.first_name, employee.last_name, role.title AS role, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN employee manager on manager.id = employee.manager_id INNER JOIN role ON (role.id = employee.role_id) INNER JOIN department ON (department.id = role.department_id) ORDER BY employee.id;`
@@ -127,6 +127,39 @@ function viewRoles() {
         mainMenu();
     });
 };
+
+//"Add to Table" Functions
+
+// function addEmployee() {
+//     inquirer.prompt([
+//         {
+
+//         }
+//         {
+            
+//         }
+//     ])
+// }
+
+function addDepartment() {
+    inquirer.prompt([
+        {type: "input",
+        name: "department",
+        message: "What is the name of the department?"
+        }
+    ]).then ((answer) => {
+        const sql = `INSERT INTO department(name) VALUES("${answer.department}");`
+        db.query(sql, (err, res) => {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          console.log("Added " + answer.department + " to the database");
+          mainMenu();
+        });
+    });
+};
+
 
 
 
