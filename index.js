@@ -20,15 +20,21 @@ const db = mysql.createConnection(
 );
 
 
+//wWelcome message and start main Menu
+db.connect(function (err) {
+  if (err) throw err;
+  console.log("***********************************");
+  console.log("*                                 *");
+  console.log("*        EMPLOYEE MANAGER         *");
+  console.log("*                                 *");
+  console.log("***********************************");
+  console.log("");
+  mainMenu();
+});
 
 
-// Give the user a pleasant welcome message.
-console.log("***********************************");
-console.log("*                                 *");
-console.log("*        EMPLOYEE MANAGER         *");
-console.log("*                                 *");
-console.log("***********************************");
-console.log("")
+
+
 
 
 
