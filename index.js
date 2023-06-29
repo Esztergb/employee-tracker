@@ -130,15 +130,15 @@ function viewRoles() {
 
 function addEmployee() {
     const sql2 = `SELECT * FROM employee`;
-    db.query(sql2, (error, response) => {
-        employeeList = response.map(employees => ({
+    db.query(sql2, (err, res) => {
+        employeeList = res.map(employees => ({
             name: employees.first_name.concat(" ", employees.last_name),
             value: employees.id
         }));
 
     const sql3 = `SELECT * FROM role`;
-    db.query(sql3, (error, response) => {
-        roleList = response.map(role => ({
+    db.query(sql3, (err, res) => {
+        roleList = res.map(role => ({
             name: role.title,
             value: role.id
         }));
@@ -200,6 +200,44 @@ function addDepartment() {
         mainMenu();
       });
     });
-}
+};
+
+function addRole() {
+    const sql2 = `SELECT * FROM department`;
+    db.query(sql2, (err, res) => {
+        departmentList = res.map(departments => ({
+            name: departments.name,
+            value: departments.id
+        }));
+        return inquirer.prompt([
+            {
+                type: 'input',
+                name: 'title',
+                message: 'What is the name of the role?',
+            },
+            {
+                type: 'input',
+                name: 'salary',
+                message: 'What is the salary of the role?',
+            },
+            {
+                type: 'list',
+                name: 'department',
+                message: 'Which Department does the role belong to?',
+                choices: departmentList
+            }
+        ]).then((answer) => {
+            const sql = `INSERT INTO role(title, salary, department_id) VALUES(?, ?, ?);`;
+            db.query(sql, [answer.title, answer.salary, answer.department], (err, res) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log("Added " + answer.title + " to the database")
+                mainMenu();
+            });
+        });
+    });
+};
 
 
