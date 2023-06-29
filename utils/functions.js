@@ -40,4 +40,4 @@
 //   });
 // }
 
-// module.export = {viewDepartments, viewEmployees, viewRoles};
+// module.exports = {viewDepartments, viewEmployees, viewRoles};

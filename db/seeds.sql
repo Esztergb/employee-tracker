@@ -1,3 +1,4 @@
+-- Active: 1688057078476@@127.0.0.1@3306@employees_db
 INSERT INTO department (name)
 VALUES
 ('Engineering'),
