@@ -30,7 +30,7 @@ Developers frequently have to create interfaces that allow non-developers to eas
 The application will be invoked by using the “node index” command.  
 Click on the screenshot below to start the **Screencastify video tutorial**:
 
-*[![screencastify video](./assets/Screenshot%202023-06-28%20at%209.37.17%20AM.png)](https://drive.google.com/file/d/18I5Sc-8zDfKETnU2amdwIsiqKYSatcuS/view)*
+*[![screencastify video](./assets/Screenshot%202023-06-28%20at%209.37.17%20AM.png)](https://drive.google.com/file/d/183gtI8ZbJWZdBfOp5qtFJ9XMNwB4vJ4D/view)*
   
 ## License
 This project is covered under the MIT licence.  
