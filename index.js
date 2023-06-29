@@ -145,12 +145,12 @@ function addEmployee() {
             return inquirer.prompt([
                 {
                     type: 'input',
-                    name: 'first',
+                    name: 'first_name',
                     message: "What is the employee's first name?",
                 },
                 {
                     type: 'input',
-                    name: 'last',
+                    name: 'last_name',
                     message: "What is the employee's last name?",
                 },
                 {
@@ -165,14 +165,14 @@ function addEmployee() {
                     message: "Who is the employee's manager?",
                     choices: employeeList
                 }
-            ]).then((answers) => {
-                const sql = `INSERT INTO employee SET first_name='${answers.first}', last_name= '${answers.last}', role_id= ${answers.role}, manager_id=${answers.manager};`
-                db.query(sql, (err, res) => {
+            ]).then((answer) => {
+                const sql = `INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);`;
+                db.query(sql, [answer.first_name, answer.last_name, answer.role, answer.manager], (err, res) => {
                     if (err) {
                         console.log(err);
                         return;
                     }
-                    console.log("Added " + answers.first + " " + answers.last + " to the database")
+                    console.log("Added " + answer.first_name + " " + answer.last_name + " to the database")
                     mainMenu();
                 });
             });
