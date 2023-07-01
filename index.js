@@ -1,7 +1,7 @@
 //dependencies
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
-// const cTable = require("console.table");
+const cTable = require("console.table");
 // const db = require("./config/connection");
 //connect to database
 require("dotenv").config();
@@ -46,6 +46,7 @@ function mainMenu() {
           "Add Department",
           "Add Role",
           "Remove Employee",
+          "Remove Department",
           "Update Employee Role",
           "Exit",
         ],
@@ -83,6 +84,10 @@ function mainMenu() {
 
         case "Remove Employee":
           deleteEmployee();
+          break;
+
+        case "Remove Department":
+          deleteDepartment();
           break;
 
         case "Exit":
@@ -339,6 +344,36 @@ function deleteEmployee() {
             return;
           }
           console.log("Deleted employee from database");
+          mainMenu();
+        });
+      });
+  });
+}
+
+function deleteDepartment() {
+  const sql2 = `SELECT * FROM department`;
+  db.query(sql2, (err, res) => {
+    departmentList = res.map((department) => ({
+      name: department.name,
+      value: department.id,
+    }));
+    return inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "department",
+          message: "Select the department to be deleted?",
+          choices: departmentList,
+        },
+      ])
+      .then((answers) => {
+        const sql = `DELETE FROM department WHERE id =${answers.department};`;
+        db.query(sql, (err, res) => {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          console.log("Deleted department from database");
           mainMenu();
         });
       });
