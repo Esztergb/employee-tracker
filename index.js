@@ -310,8 +310,8 @@ function updateRole() {
           },
         ])
         .then((answers) => {
-          const sql = `UPDATE employee SET role_id = ${answers.role}, manager_id = ${answers.manager} WHERE id = ${answers.employee};`;
-          db.query(sql, (err, res) => {
+          const sql = `UPDATE employee SET role_id = ?, manager_id = ? WHERE id = ?;`;
+          db.query(sql, [answers.role, answers.manager, answers.employee], (err, res) => {
             if (err) {
               console.log(err);
               return;
