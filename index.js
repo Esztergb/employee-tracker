@@ -342,8 +342,8 @@ function deleteEmployee() {
         },
       ])
       .then((answers) => {
-        const sql = `DELETE FROM employee WHERE id =${answers.employee};`;
-        db.query(sql, (err, res) => {
+        const sql = `DELETE FROM employee WHERE id = ?;`;
+        db.query(sql, [answers.employee], (err, res) => {
           if (err) {
             console.log(err);
             return;
@@ -372,8 +372,8 @@ function deleteDepartment() {
         },
       ])
       .then((answers) => {
-        const sql = `DELETE FROM department WHERE id =${answers.department};`;
-        db.query(sql, (err, res) => {
+        const sql = `DELETE FROM department WHERE id = ?;`;
+        db.query(sql, [answers.department], (err, res) => {
           if (err) {
             console.log(err);
             return;
@@ -402,8 +402,8 @@ function deleteRole() {
         },
       ])
       .then((answers) => {
-        const sql = `DELETE FROM role WHERE id =${answers.role};`;
-        db.query(sql, (err, res) => {
+        const sql = `DELETE FROM role WHERE id = ?;`;
+        db.query(sql,[answers.role], (err, res) => {
           if (err) {
             console.log(err);
             return;
