@@ -47,6 +47,7 @@ function mainMenu() {
           "Add Role",
           "Remove Employee",
           "Remove Department",
+          "Remove Role Title",
           "Update Employee Role",
           "Exit",
         ],
@@ -88,6 +89,10 @@ function mainMenu() {
 
         case "Remove Department":
           deleteDepartment();
+          break;
+        
+        case "Remove Role Title":
+          deleteRole();
           break;
 
         case "Exit":
@@ -374,6 +379,36 @@ function deleteDepartment() {
             return;
           }
           console.log("Deleted department from database");
+          mainMenu();
+        });
+      });
+  });
+}
+
+function deleteRole() {
+  const sql2 = `SELECT * FROM role`;
+  db.query(sql2, (err, res) => {
+    roleListList = res.map((role) => ({
+      name: role.title,
+      value: role.id,
+    }));
+    return inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "role",
+          message: "Select the role title to be deleted?",
+          choices: roleListList,
+        },
+      ])
+      .then((answers) => {
+        const sql = `DELETE FROM role WHERE id =${answers.role};`;
+        db.query(sql, (err, res) => {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          console.log("Deleted role from database");
           mainMenu();
         });
       });
